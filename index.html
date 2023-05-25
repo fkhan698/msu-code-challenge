@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Education Stats Country</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Data Display</h1>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Country Code</th>
+              <th>Short Name</th>
+              <th>Region</th>
+              <th>Income Group</th>
+              <th>More Details</th>
+
+              <!-- Add more table headers for other properties -->
+            </tr>
+          </thead>
+          <tbody id="countryTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      fetch("./EdStatsCountry.json")
+        .then((response) => response.json())
+        .then((data) => {
+          const tableBody = document.getElementById("countryTableBody")
+          data.forEach((country) => {
+            const row = document.createElement("tr")
+            row.innerHTML = `
+                <td>${country["Country Code"]}</td>
+                <td>${country["Short Name"]}</td>
+                <td>${country["Region"]}</td>
+                <td>${country["Income Group"]}</td>
+
+            `
+            tableBody.appendChild(row)
+          })
+        })
+    </script>
+  </body>
+</html>
